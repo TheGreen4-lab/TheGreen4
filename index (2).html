@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TheGreen4 | Luxury Landscaping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:      #ffffff;
+      --off-white:  #f7f9f5;
+      --light:      #eef3ea;
+      --green-pale: #d4e8c2;
+      --green:      #3a7d28;
+      --green-mid:  #2e6620;
+      --green-dark: #1e4a14;
+      --accent:     #5aab3f;
+      --text:       #1a2e12;
+      --text-mid:   #3d5c30;
+      --text-light: #6b8f5e;
+      --border:     rgba(58,125,40,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--light); }
+    ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 4px; }
+
+    /* ════ NAV ════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(30,74,20,0.08); }
+
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .logo-the { font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.1em; color: var(--text); text-transform: uppercase; }
+    .logo-green { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: var(--green); letter-spacing: -0.01em; line-height: 1; margin: 0 1px; }
+    .logo-four { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.75rem; color: var(--white); background: var(--green); line-height: 1; padding: 0.06em 0.22em 0.1em; border-radius: 5px; letter-spacing: -0.02em; margin-left: 2px; box-shadow: 0 3px 12px rgba(58,125,40,0.4); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--text-mid); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: color 0.25s; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta { background: var(--green) !important; color: var(--white) !important; padding: 0.6rem 1.4rem; border-radius: 6px; font-weight: 600 !important; transition: background 0.25s, transform 0.2s !important; }
+    .nav-cta:hover { background: var(--green-mid) !important; transform: translateY(-1px); }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(25px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ════ HERO ════ */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--off-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: var(--green-pale);
+      opacity: 0.55;
+      filter: blur(50px);
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute;
+      top: -50px; right: 0;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: var(--green-pale);
+      opacity: 0.4;
+      filter: blur(40px);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--green); border-radius: 2px; }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1.4rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero h1 .green-word { color: var(--green); font-style: italic; }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      line-height: 1.85;
+      color: var(--text-light);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; animation: fadeUp 0.8s 0.3s ease both; }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 20px rgba(58,125,40,0.3);
+    }
+    .btn-primary:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(58,125,40,0.35); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--green);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid var(--green);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-outline:hover { background: var(--green); color: var(--white); }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--green); line-height: 1; }
+    .hero-stat-label { font-size: 0.72rem; color: var(--text-light); margin-top: 0.2rem; }
+
+    /* HERO RIGHT */
+    .hero-right {
+      background: var(--green-dark);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 110%, #1e4a14 30%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 80% 20%, #2e6620 0%, transparent 60%),
+        linear-gradient(160deg, #2e6620 0%, #1e4a14 50%, #0f2a09 100%);
+    }
+    .leaf-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(90,171,63,0.2); }
+    .leaf-circle:nth-child(1) { width: 380px; height: 380px; top: -80px; right: -80px; border-color: rgba(90,171,63,0.15); }
+    .leaf-circle:nth-child(2) { width: 260px; height: 260px; top: -20px; right: -20px; border-color: rgba(90,171,63,0.28); }
+    .leaf-circle:nth-child(3) { width: 500px; height: 500px; bottom: -200px; left: -150px; border-color: rgba(90,171,63,0.1); background: radial-gradient(circle, rgba(46,102,32,0.35), transparent); }
+
+    @keyframes sway {
+      0%,100% { transform: rotate(-5deg) translateY(0); }
+      50% { transform: rotate(5deg) translateY(-15px); }
+    }
+    .hero-leaf { position: absolute; font-size: 6rem; opacity: 0.13; animation: sway 8s ease-in-out infinite; }
+    .hero-leaf:nth-child(4) { top: 15%; left: 10%; font-size: 8rem; animation-delay: 0s; }
+    .hero-leaf:nth-child(5) { top: 38%; right: 15%; font-size: 5rem; animation-delay: -3s; }
+    .hero-leaf:nth-child(6) { bottom: 25%; left: 28%; font-size: 10rem; animation-delay: -6s; opacity: 0.07; }
+
+    .hero-brand-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -52%); text-align: center; z-index: 2; }
+    .hero-brand-big { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(4rem, 8vw, 7.5rem); line-height: 0.9; color: rgba(255,255,255,0.07); letter-spacing: -0.02em; user-select: none; }
+
+    .hero-right-card {
+      position: relative;
+      z-index: 3;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: 100%;
+    }
+    .hero-right-card-icon { width: 50px; height: 50px; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .hero-right-card p { font-size: 0.84rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+    .hero-right-card strong { color: var(--white); font-weight: 600; display: block; margin-bottom: 0.2rem; }
+
+    /* ════ SHARED ════ */
+    section { padding: 6rem 4rem; }
+
+    .section-eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+    .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--green); border-radius: 2px; }
+
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; line-height: 1.15; color: var(--text); margin-bottom: 1rem; }
+    .section-title .green-word { color: var(--green); font-style: italic; }
+
+    /* ════ STRIP ════ */
+    .services-strip {
+      background: var(--green);
+      padding: 1.1rem 4rem;
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .strip-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.85); flex-shrink: 0; }
+    .strip-item span { font-size: 1rem; }
+    .strip-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.3); flex-shrink: 0; }
+
+    /* ════ ABOUT ════ */
+    .about { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+
+    .about-visual { position: relative; }
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(145deg, var(--green-pale) 0%, var(--light) 40%, var(--green-pale) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img-main::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 70%, rgba(58,125,40,0.15), transparent 50%), radial-gradient(circle at 80% 20%, rgba(90,171,63,0.12), transparent 50%);
+    }
+    .big-leaf { font-size: 10rem; opacity: 0.3; position: relative; z-index: 1; animation: sway 10s ease-in-out infinite; }
+
+    .about-badge {
+      position: absolute;
+      bottom: -1.5rem; right: -1.5rem;
+      background: var(--green);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(58,125,40,0.3);
+    }
+    .about-badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+    .about-badge-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; margin-top: 0.2rem; }
+
+    .about-text p { font-size: 0.95rem; line-height: 1.9; color: var(--text-light); margin-bottom: 1.2rem; }
+
+    .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-top: 2rem; }
+    .about-feature { display: flex; align-items: flex-start; gap: 0.7rem; }
+    .feature-check { width: 22px; height: 22px; background: var(--green-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 0.68rem; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .about-feature span { font-size: 0.82rem; color: var(--text-mid); font-weight: 500; }
+
+    /* ════ SERVICES ════ */
+    .services { background: var(--off-white); }
+    .services-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3rem; }
+    .services-intro { font-size: 0.95rem; line-height: 1.8; color: var(--text-light); }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      cursor: default;
+    }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(58,125,40,0.12); border-color: rgba(58,125,40,0.35); }
+    .service-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--green), var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-icon-wrap { width: 52px; height: 52px; background: var(--light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.2rem; transition: background 0.3s; }
+    .service-card:hover .service-icon-wrap { background: var(--green-pale); }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+    .service-card p { font-size: 0.82rem; line-height: 1.75; color: var(--text-light); }
+    .service-num { position: absolute; top: 1rem; right: 1.2rem; font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--light); line-height: 1; }
+
+    /* ════ PROCESS ════ */
+    .process { background: var(--green-dark); position: relative; overflow: hidden; }
+    .process::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 90% 50%, rgba(46,102,32,0.5), transparent), radial-gradient(ellipse 40% 60% at 10% 80%, rgba(90,171,63,0.15), transparent); }
+
+    .process-header { text-align: center; margin-bottom: 4rem; position: relative; z-index: 1; }
+    .process-header .section-eyebrow { color: var(--accent); justify-content: center; }
+    .process-header .section-eyebrow::before { background: var(--accent); }
+    .process-header .section-title { color: var(--white); }
+    .process-header .section-title .acc { color: var(--accent); font-style: italic; }
+
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; position: relative; z-index: 1; }
+
+    .step { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2rem; text-align: center; transition: background 0.3s, transform 0.3s; }
+    .step:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+    .step-num-wrap { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); box-shadow: 0 4px 16px rgba(90,171,63,0.4); }
+    .step h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+    .step p { font-size: 0.8rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
+
+    /* ════ CTA ════ */
+    .cta-banner { background: var(--light); padding: 5rem 4rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem; border-top: 1px solid var(--border); }
+    .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; color: var(--text); margin-bottom: 0.6rem; }
+    .cta-banner p { font-size: 0.9rem; color: var(--text-light); }
+    .cta-actions { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
+
+    /* ════ CONTACT ════ */
+    .contact { background: var(--white); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-info p { font-size: 0.95rem; line-height: 1.8; color: var(--text-light); margin: 1rem 0 2.5rem; }
+
+    .contact-items { display: flex; flex-direction: column; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border); }
+    .contact-item:first-child { border-top: 1px solid var(--border); }
+    .contact-icon { width: 44px; height: 44px; background: var(--light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-item-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.15rem; }
+    .contact-item-val { font-size: 0.9rem; font-weight: 500; color: var(--text); }
+    .contact-item-val a { color: var(--text); text-decoration: none; transition: color 0.25s; }
+    .contact-item-val a:hover { color: var(--green); }
+
+    .contact-form { background: var(--off-white); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+    .form-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+    .form-sub { font-size: 0.78rem; color: var(--text-light); margin-bottom: 1.8rem; }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.4rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(58,125,40,0.1); }
+    .form-group textarea { resize: none; height: 110px; }
+    .form-group select option { background: var(--white); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 16px rgba(58,125,40,0.25);
+    }
+    .form-submit:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(58,125,40,0.3); }
+
+    /* ════ FOOTER ════ */
+    footer { background: var(--text); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .footer-logo { display: flex; align-items: center; text-decoration: none; }
+    .footer-logo .logo-the { color: rgba(255,255,255,0.5); font-size: 0.88rem; }
+    .footer-logo .logo-green { color: var(--accent); font-size: 1.25rem; }
+    .footer-logo .logo-four { font-size: 1.45rem; background: var(--accent); color: var(--white); box-shadow: none; }
+    .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.3); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.25s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ════ REVEAL ════ */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ════ MOBILE ════ */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 6rem 1.5rem 3rem; }
+      .hero-right { min-height: 280px; }
+      section { padding: 4rem 1.5rem; }
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      .about-badge { bottom: -1rem; right: -0.5rem; }
+      .services-top { grid-template-columns: 1fr; gap: 1rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .cta-banner { flex-direction: column; padding: 3rem 1.5rem; }
+      .cta-actions { width: 100%; }
+      .contact { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .services-strip { padding: 1rem 1.5rem; }
+      footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-logo" href="#">
+    <span class="logo-the">THE</span>
+    <span class="logo-green">Green</span>
+    <span class="logo-four">4</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Premium Landscaping · New Jersey</div>
+    <h1>Your Outdoor Space,<br/><span class="green-word">Elevated.</span></h1>
+    <p class="hero-sub">TheGreen4 transforms ordinary yards into stunning, living masterpieces — crafted with precision, passion, and a love for the natural world.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">🌿 Get a Free Quote</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Projects Done</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">10+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Satisfaction</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="leaf-circle"></div>
+    <div class="leaf-circle"></div>
+    <div class="leaf-circle"></div>
+    <div class="hero-leaf">🌿</div>
+    <div class="hero-leaf">🍃</div>
+    <div class="hero-leaf">🌱</div>
+    <div class="hero-brand-overlay">
+      <div class="hero-brand-big">TG4</div>
+    </div>
+    <div class="hero-right-card">
+      <div class="hero-right-card-icon">⭐</div>
+      <div>
+        <strong>Trusted Across New Jersey</strong>
+        <p>Residential & commercial landscaping built to impress every season.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="services-strip">
+  <div class="strip-item"><span>🌱</span> Landscape Design</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item"><span>✂️</span> Lawn Maintenance</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item"><span>🪨</span> Hardscaping</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item"><span>🌺</span> Planting & Gardens</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item"><span>💧</span> Irrigation</div>
+  <div class="strip-dot"></div>
+  <div class="strip-item"><span>❄️</span> Seasonal Cleanup</div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-img-main">
+      <span class="big-leaf">🌿</span>
+    </div>
+    <div class="about-badge">
+      <div class="about-badge-num">10+</div>
+      <div class="about-badge-label">Years of<br/>Excellence</div>
+    </div>
+  </div>
+
+  <div class="about-text reveal">
+    <div class="section-eyebrow">About TheGreen4</div>
+    <h2 class="section-title">Crafting <span class="green-word">Outdoor</span> Masterpieces</h2>
+    <p>At TheGreen4, we believe your outdoor space is an extension of who you are. Our team of expert landscapers, designers, and horticulturists work together to transform any property into a stunning sanctuary.</p>
+    <p>From intimate residential gardens to expansive commercial grounds, we bring meticulous attention to detail and a passion for the natural world to every project we touch.</p>
+    <div class="about-features">
+      <div class="about-feature"><div class="feature-check">✓</div><span>Licensed & Insured</span></div>
+      <div class="about-feature"><div class="feature-check">✓</div><span>Free Consultations</span></div>
+      <div class="about-feature"><div class="feature-check">✓</div><span>Premium Materials</span></div>
+      <div class="about-feature"><div class="feature-check">✓</div><span>Year-Round Service</span></div>
+      <div class="about-feature"><div class="feature-check">✓</div><span>Locally Rooted in NJ</span></div>
+      <div class="about-feature"><div class="feature-check">✓</div><span>100% Satisfaction</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-top">
+    <div class="reveal">
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">Our <span class="green-word">Signature</span> Services</h2>
+    </div>
+    <p class="services-intro reveal">Every service is executed with the highest standards of craftsmanship, using premium materials and techniques refined over a decade of work across New Jersey.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal"><span class="service-num">01</span><div class="service-icon-wrap">🌱</div><h3>Landscape Design</h3><p>Custom design plans tailored to your property. We blend aesthetic vision with horticultural expertise to create spaces that impress.</p></div>
+    <div class="service-card reveal"><span class="service-num">02</span><div class="service-icon-wrap">✂️</div><h3>Lawn Maintenance</h3><p>Premium upkeep programs that keep your lawn lush, healthy, and immaculate throughout every season of the year.</p></div>
+    <div class="service-card reveal"><span class="service-num">03</span><div class="service-icon-wrap">🪨</div><h3>Hardscaping</h3><p>Patios, walkways, retaining walls, and outdoor living structures crafted from premium materials that stand the test of time.</p></div>
+    <div class="service-card reveal"><span class="service-num">04</span><div class="service-icon-wrap">🌺</div><h3>Planting & Gardens</h3><p>Seasonal color, perennial gardens, and lush plantings selected for your climate and vision. Gardens that grow more beautiful each year.</p></div>
+    <div class="service-card reveal"><span class="service-num">05</span><div class="service-icon-wrap">💧</div><h3>Irrigation Systems</h3><p>Smart, water-efficient irrigation designed to keep your landscape thriving while minimizing waste and effort on your part.</p></div>
+    <div class="service-card reveal"><span class="service-num">06</span><div class="service-icon-wrap">❄️</div><h3>Seasonal Cleanup</h3><p>Spring and fall cleanups, leaf removal, and winterization to protect your landscape investment every single year.</p></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-header reveal">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-title">Our <span class="acc">Simple</span> Process</h2>
+  </div>
+  <div class="process-steps">
+    <div class="step reveal"><div class="step-num-wrap">01</div><h4>Consultation</h4><p>We listen to your vision, assess your property, and understand your goals before anything begins.</p></div>
+    <div class="step reveal"><div class="step-num-wrap">02</div><h4>Custom Design</h4><p>Our designers craft a detailed plan tailored to your space, style, and budget.</p></div>
+    <div class="step reveal"><div class="step-num-wrap">03</div><h4>Expert Build</h4><p>Our skilled crew brings the plan to life with precision craftsmanship and premium materials.</p></div>
+    <div class="step reveal"><div class="step-num-wrap">04</div><h4>Ongoing Care</h4><p>We maintain and evolve your landscape so it only gets more beautiful with time.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <div class="reveal">
+    <h2>Ready to Transform Your Outdoor Space?</h2>
+    <p>Let's create something extraordinary together. Call or message us today for a free consultation.</p>
+  </div>
+  <div class="cta-actions reveal">
+    <a href="tel:7326307953" class="btn-primary">📞 Call Now</a>
+    <a href="#contact" class="btn-outline">Send a Message</a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-info reveal">
+    <div class="section-eyebrow">Contact Us</div>
+    <h2 class="section-title">Let's <span class="green-word">Talk</span></h2>
+    <p>We'd love to hear about your project. Reach out through any of the channels below or fill out the form and we'll get back to you within 24 hours.</p>
+    <div class="contact-items">
+      <div class="contact-item"><div class="contact-icon">📞</div><div><div class="contact-item-label">Phone</div><div class="contact-item-val"><a href="tel:7326307953">(732) 630-7953</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">✉️</div><div><div class="contact-item-label">Email</div><div class="contact-item-val"><a href="mailto:info@thegreen4digital.com">info@thegreen4digital.com</a></div></div></div>
+      <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-item-label">Service Area</div><div class="contact-item-val">New Jersey & Surrounding Areas</div></div></div>
+      <div class="contact-item"><div class="contact-icon">🕐</div><div><div class="contact-item-label">Hours</div><div class="contact-item-val">Mon – Sat: 7am – 6pm</div></div></div>
+    </div>
+  </div>
+
+  <div class="contact-form reveal">
+    <h3 class="form-title">Request a Free Quote</h3>
+    <p class="form-sub">We typically respond within 24 hours.</p>
+    <div class="form-row">
+      <div class="form-group"><label for="fname">First Name</label><input type="text" id="fname" placeholder="Alan" /></div>
+      <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Smith" /></div>
+    </div>
+    <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="you@example.com" /></div>
+    <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" placeholder="(000) 000-0000" /></div>
+    <div class="form-group">
+      <label for="service">Service Interested In</label>
+      <select id="service">
+        <option value="">Select a service...</option>
+        <option>Landscape Design</option>
+        <option>Lawn Maintenance</option>
+        <option>Hardscaping</option>
+        <option>Planting & Gardens</option>
+        <option>Irrigation Systems</option>
+        <option>Seasonal Cleanup</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group"><label for="message">Tell Us About Your Project</label><textarea id="message" placeholder="Describe your property and what you're looking to achieve..."></textarea></div>
+    <button class="form-submit" id="submit-btn" type="button" onclick="handleSubmit()">Send Message →</button>
+    <p id="form-msg" style="display:none;margin-top:1rem;font-size:0.78rem;text-align:center;"></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#">
+    <span class="logo-the">THE</span>
+    <span class="logo-green">Green</span>
+    <span class="logo-four">4</span>
+  </a>
+  <p class="footer-copy">© 2025 TheGreen4. All rights reserved. | Luxury Landscaping NJ</p>
+  <ul class="footer-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 90);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    const isOpen = links.style.display === 'flex';
+    links.style.cssText = isOpen ? '' :
+      'display:flex;flex-direction:column;position:fixed;top:66px;left:0;right:0;background:rgba(247,249,245,0.97);padding:1.5rem 2rem;gap:1.2rem;border-bottom:1px solid rgba(58,125,40,0.15);z-index:99;backdrop-filter:blur(16px);';
+  }
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => { document.querySelector('.nav-links').style.cssText = ''; });
+  });
+
+  // Formspree
+  async function handleSubmit() {
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value.trim();
+    const btn = document.getElementById('submit-btn');
+    const msg = document.getElementById('form-msg');
+
+    if (!fname || !email) {
+      msg.style.display = 'block'; msg.style.color = '#c0392b';
+      msg.textContent = 'Please fill in your name and email.'; return;
+    }
+
+    btn.textContent = 'Sending...'; btn.disabled = true; btn.style.opacity = '0.7';
+
+    try {
+      const res = await fetch('https://formspree.io/f/xrejezga', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name: fname + ' ' + lname, email, phone, service, message })
+      });
+      if (res.ok) {
+        btn.textContent = '✓ Message Sent!'; btn.style.background = '#2e6620'; btn.style.opacity = '1';
+        msg.style.display = 'block'; msg.style.color = 'var(--green)';
+        msg.textContent = "We'll be in touch soon. Thank you!";
+        ['fname','lname','email','phone','service','message'].forEach(id => document.getElementById(id).value = '');
+        setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.disabled = false; msg.style.display = 'none'; }, 4000);
+      } else { throw new Error(); }
+    } catch {
+      btn.textContent = 'Send Message →'; btn.disabled = false; btn.style.opacity = '1';
+      msg.style.display = 'block'; msg.style.color = '#c0392b';
+      msg.textContent = 'Something went wrong. Please email us at info@thegreen4digital.com';
+    }
+  }
+</script>
+</body>
+</html>
